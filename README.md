@@ -216,3 +216,10 @@ We read each and every suggestion that comes through.
 
 <p style="display:flex; justify-content:center; align-items: center; align-content: center">Made with &nbsp;:heart:&nbsp; by&nbsp;&nbsp; 
 <a href="https://akalsoftware.com/" target="_blank" rel="noopener noreferrer"><img width="100" valign="center" src="https://d33wubrfki0l68.cloudfront.net/235d6386bc34b2e633b93640a616161b85ee7ba6/1bd9c/assets/images/akalsoftware.svg" alt="Akal Software logo"></a></p>
+
+## Installation notes
+
+Must be on Linux:
+```bash
+composer update --no-dev
+```
