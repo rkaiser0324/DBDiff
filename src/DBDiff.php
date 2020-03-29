@@ -10,14 +10,13 @@ use DBDiff\Templater;
 
 class DBDiff {
     
-    public function run($params = null) {
+    public function run($params) {
 
         // Increase memory limit
         ini_set('memory_limit', '512M');
 
         try {
-            if (empty($params))
-                $params = ParamsFactory::get();
+
 
             // Diff
             $diffCalculator = new DiffCalculator;
