@@ -8,7 +8,7 @@ class ParamsFactory {
     public static function get() {
         
         $params = new DefaultParams;
-
+throw new exception('here');
 $params->server1 = [
     'user'     => 'root',
     'password' => '',
@@ -17,7 +17,7 @@ $params->server1 = [
 ];
 $params->template='templates/simple-db-migrate.tmpl';
 $params->nocomments = true;
-$params->output = sprintf('./%s-local-changes.sql', time());
+$params->output = sprintf('./%s-local-changes.sql', strftime('%Y%m%d%H%M'));
 $params->include='all';
 $params->input = [
     'kind' => 'db',
