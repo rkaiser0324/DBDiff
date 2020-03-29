@@ -9,18 +9,36 @@ class ParamsFactory {
         
         $params = new DefaultParams;
 
-        $cli = new CLIGetter;
-        $paramsCLI = $cli->getParams();
+$params->server1 = [
+    'user'     => 'root',
+    'password' => '',
+    'host'     => 'localhost',
+    'port'     => 3306
+];
+$params->template='templates/simple-db-migrate.tmpl';
+$params->nocomments = true;
+$params->output = sprintf('./%s-local-changes.sql', time());
+$params->include='all';
+$params->input = [
+    'kind' => 'db',
+//'server1.digipowers_standingroomonly_tv:server1.digipowers_standingroomonly_tv_2020031220_liquidweb'
+    'source' => ['server' => 'server1', 'db' => 'digipowers_standingroomonly_tv'],
+    'target' => ['server' => 'server1', 'db' => 'digipowers_standingroomonly_tv_2020031220_liquidweb'],
+];
 
-        if (!isset($paramsCLI->debug)) {
-            error_reporting(E_ERROR);
-        }
 
-        $fs = new FSGetter($paramsCLI);
-        $paramsFS = $fs->getParams();
-        $params = self::merge($params, $paramsFS);
+        // $cli = new CLIGetter;
+        // $paramsCLI = $cli->getParams();
 
-        $params = self::merge($params, $paramsCLI);
+        // if (!isset($paramsCLI->debug)) {
+        //     error_reporting(E_ERROR);
+        // }
+
+        // $fs = new FSGetter($paramsCLI);
+        // $paramsFS = $fs->getParams();
+        // $params = self::merge($params, $paramsFS);
+
+        // $params = self::merge($params, $paramsCLI);
         
         if (empty($params->server1)) {
             throw new CLIException("A server is required");
