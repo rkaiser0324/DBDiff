@@ -1,60 +1,58 @@
 SQL_UP = u"""
-CREATE TABLE `wp_esign_settings` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `setting_name` varchar(55) NOT NULL,
-  `setting_value` longtext NOT NULL,
-  PRIMARY KEY (`setting_id`),
-  KEY `setting_name` (`setting_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-CREATE TABLE `wp_esign_signatures` (
-  `signature_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `signature_type` varchar(20) NOT NULL DEFAULT 'full',
-  `signature_hash` varchar(64) NOT NULL,
-  `signature_salt` varchar(40) NOT NULL,
-  `signature_data` longtext NOT NULL,
-  `signature_added` datetime NOT NULL,
-  PRIMARY KEY (`signature_id`),
-  KEY `signature_type` (`signature_type`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-CREATE TABLE `wp_esign_users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `wp_user_id` int(11) DEFAULT NULL,
-  `uuid` char(36) NOT NULL,
-  `user_email` varchar(100) NOT NULL,
-  `user_title` varchar(55) NOT NULL DEFAULT '',
-  `first_name` varchar(45) NOT NULL,
-  `last_name` varchar(65) NOT NULL,
-  `is_admin` smallint(6) NOT NULL,
-  `is_signer` smallint(6) NOT NULL,
-  `is_sa` smallint(6) NOT NULL,
-  `is_inactive` smallint(6) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `user_email` (`user_email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-CREATE TABLE `wp_links` (
-  `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `link_url` varchar(255) NOT NULL DEFAULT '',
-  `link_name` varchar(255) NOT NULL DEFAULT '',
-  `link_image` varchar(255) NOT NULL DEFAULT '',
-  `link_target` varchar(25) NOT NULL DEFAULT '',
-  `link_description` varchar(255) NOT NULL DEFAULT '',
-  `link_visible` varchar(20) NOT NULL DEFAULT 'Y',
-  `link_owner` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `link_rating` int(11) NOT NULL DEFAULT '0',
-  `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `link_rel` varchar(255) NOT NULL DEFAULT '',
-  `link_notes` mediumtext NOT NULL,
-  `link_rss` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`link_id`),
-  KEY `link_visible` (`link_visible`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+CREATE TABLE `states` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `abbreviation` varchar(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+CREATE TABLE `phinxlog` (
+  `version` bigint(20) NOT NULL,
+  `migration_name` varchar(100) DEFAULT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `breakpoint` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `wp_ontrix_members` ADD `is_married` tinyint(1) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_projects` ADD `client_id` int(11) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_projects` ADD `zip` int(10) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_projects` ADD `state_id` int(11) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_projects` ADD `city` varchar(255) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `is_exempt` tinyint(1) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `dependents` int(11) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `state_id` int(11) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `zip` varchar(10) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `city` varchar(255) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `address_2` varchar(255) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `address` varchar(255) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `drivers_license_state_id` int(11) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `drivers_license_number` varchar(20) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_members` ADD `social_security_number` varchar(20) DEFAULT NULL;
+ALTER TABLE `wp_ontrix_projects` ADD `audience_size` int(11) DEFAULT NULL;
 """
 SQL_DOWN = u"""
-DROP TABLE `wp_esign_settings`;
-DROP TABLE `wp_esign_signatures`;
-DROP TABLE `wp_esign_users`;
-DROP TABLE `wp_links`;
+DROP TABLE `clients`;
+DROP TABLE `states`;
+DROP TABLE `phinxlog`;
+ALTER TABLE `wp_ontrix_members` DROP `is_married`;
+ALTER TABLE `wp_ontrix_projects` DROP `client_id`;
+ALTER TABLE `wp_ontrix_projects` DROP `zip`;
+ALTER TABLE `wp_ontrix_projects` DROP `state_id`;
+ALTER TABLE `wp_ontrix_projects` DROP `city`;
+ALTER TABLE `wp_ontrix_members` DROP `is_exempt`;
+ALTER TABLE `wp_ontrix_members` DROP `dependents`;
+ALTER TABLE `wp_ontrix_members` DROP `state_id`;
+ALTER TABLE `wp_ontrix_members` DROP `zip`;
+ALTER TABLE `wp_ontrix_members` DROP `city`;
+ALTER TABLE `wp_ontrix_members` DROP `address_2`;
+ALTER TABLE `wp_ontrix_members` DROP `address`;
+ALTER TABLE `wp_ontrix_members` DROP `drivers_license_state_id`;
+ALTER TABLE `wp_ontrix_members` DROP `drivers_license_number`;
+ALTER TABLE `wp_ontrix_members` DROP `social_security_number`;
+ALTER TABLE `wp_ontrix_projects` DROP `audience_size`;
 """

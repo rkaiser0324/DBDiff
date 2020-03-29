@@ -235,4 +235,8 @@ php dbdiff server1.digipowers_standingroomonly_tv:server1.digipowers_standingroo
 	--type=schema \
 	--output=./`date +"%Y%m%d%H%M"`-local-changes.sql
 
+
+php run.php server1.digipowers_standingroomonly_tv:server1.digipowers_standingroomonly_tv_2020031220_liquidweb
+
+
 ```
