@@ -222,4 +222,17 @@ We read each and every suggestion that comes through.
 Must be on Linux:
 ```bash
 composer update --no-dev
+
+./dbdiff server1.<DBAFTERNAME>:server1.<DBBEFORENAME> --output=<SQLFILE>
+
+./dbdiff server1.digipowers_standingroomonly_tv_migrated_dbdiff:server1.digipowers_standingroomonly_tv_migrated --output=./1-delete-some-tables.sql
+
+php dbdiff server1.digipowers_standingroomonly_tv:server1.digipowers_standingroomonly_tv_2020031220_liquidweb \
+	--server1=root:@localhost:3306 \
+	--include=all \
+	--nocomments=true \
+	--template=templates/simple-db-migrate.tmpl \
+	--type=schema \
+	--output=./`date +"%Y%m%d%H%M"`-local-changes.sql
+
 ```
