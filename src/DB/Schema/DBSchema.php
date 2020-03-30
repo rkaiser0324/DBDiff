@@ -40,7 +40,7 @@ class DBSchema {
         $tableSchema = new TableSchema($this->manager);
 
         $sourceTables = $this->manager->getTables('source');
-        $targetTables = $this->manager->getTables('target');
+        $targetTables = $params->snapshot === true ? [] : $this->manager->getTables('target');
 
         if (isset($params->tablesToIgnore)) {
             $sourceTables = array_diff($sourceTables, $params->tablesToIgnore);
