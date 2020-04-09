@@ -16,7 +16,7 @@ class DBSchema {
     function __construct($manager) {
         $this->manager = $manager;
     }
-    
+
     function getDiff($params) {
 
         $diffs = [];
@@ -35,12 +35,12 @@ class DBSchema {
         if ($sourceCharset !== $targetCharset) {
             $diffs[] = new SetDBCharset($dbName, $sourceCharset, $targetCharset);
         }
-        
+
         // Tables
         $tableSchema = new TableSchema($this->manager);
 
         $sourceTables = $this->manager->getTables('source');
-        $targetTables = $params->snapshot === true ? [] : $this->manager->getTables('target');
+        $targetTables = !isset($params->snapshot) ? $this->manager->getTables('target') : [];
 
         if (isset($params->tablesToIgnore)) {
             $sourceTables = array_diff($sourceTables, $params->tablesToIgnore);
